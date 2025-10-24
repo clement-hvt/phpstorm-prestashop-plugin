@@ -22,6 +22,7 @@ dependencies {
         intellijPlatform {
             phpstorm("2025.2.3")
             plugins("com.jetbrains.php:251.23774.318")
+            bundledPlugin("com.intellij.database")
         }
     }
 }

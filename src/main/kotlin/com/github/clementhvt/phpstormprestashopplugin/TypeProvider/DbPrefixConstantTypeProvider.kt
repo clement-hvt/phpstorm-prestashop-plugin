@@ -1,5 +1,6 @@
-package com.github.clementhvt.phpstormprestashopplugin
+package com.github.clementhvt.phpstormprestashopplugin.TypeProvider
 
+import com.github.clementhvt.phpstormprestashopplugin.PrestashopSettingsState
 import com.intellij.openapi.project.Project
 import com.intellij.psi.PsiElement
 import com.jetbrains.php.lang.psi.elements.ConstantReference
@@ -7,7 +8,7 @@ import com.jetbrains.php.lang.psi.elements.PhpNamedElement
 import com.jetbrains.php.lang.psi.resolve.types.PhpType
 import com.jetbrains.php.lang.psi.resolve.types.PhpTypeProvider4
 
-class DbPrefixConstanteTypeProvider: PhpTypeProvider4 {
+class DbPrefixConstantTypeProvider: PhpTypeProvider4 {
     override fun getKey(): Char {
         return '马'
     }

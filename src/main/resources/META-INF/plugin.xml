@@ -1,7 +1,7 @@
 <idea-plugin>
     <id>com.github.clementhvt.phpstormprestashopplugin</id>
     <name>PrestaShop plugin</name>
-    <vendor email="clem.hervouet@live.fr" url="https://www.yourcompany.com">YourCompany</vendor>
+    <vendor email="clem.hervouet@live.fr" url="https://github.com/clement-hvt">Clément H</vendor>
 
     <description><![CDATA[
     Plugin pour gérer le préfixe de base de données PrestaShop (_DB_PREFIX_).
@@ -10,6 +10,7 @@
     <!-- Déclare la dépendance au module PHP -->
     <depends>com.jetbrains.php</depends>
     <depends>com.intellij.modules.platform</depends>
+    <depends>com.intellij.database</depends>
 
     <extensions defaultExtensionNs="com.intellij">
         <applicationService
@@ -23,8 +24,11 @@
                 implementationClass="com.github.clementhvt.phpstormprestashopplugin.DbPrefixDocumentationProvider"
                 language="PHP"
                 order="first"/>
+        <multiHostInjector implementation="com.github.clementhvt.phpstormprestashopplugin.ObjectModelTableDefinitionSqlInjector"/>
+        <gotoDeclarationHandler implementation="com.github.clementhvt.phpstormprestashopplugin.CoreClassGotoHandler"/>
+        <codeInsight.lineMarkerProvider language="PHP" implementationClass="com.github.clementhvt.phpstormprestashopplugin.PrestashopOverrideLineMarkerProvider"/>
     </extensions>
     <extensions defaultExtensionNs="com.jetbrains.php">
-        <typeProvider4 implementation="com.github.clementhvt.phpstormprestashopplugin.DbPrefixConstanteTypeProvider"/>
+        <typeProvider4 implementation="com.github.clementhvt.phpstormprestashopplugin.TypeProvider.DbPrefixConstantTypeProvider"/>
     </extensions>
 </idea-plugin>
