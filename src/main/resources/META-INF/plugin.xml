@@ -1,6 +1,6 @@
 <idea-plugin>
     <id>com.github.clementhvt.phpstormprestashopplugin</id>
-    <name>PrestaShop plugin</name>
+    <name>PrestaShop</name>
     <vendor email="clem.hervouet@live.fr" url="https://github.com/clement-hvt">Clément H</vendor>
 
     <description><![CDATA[
@@ -13,6 +13,7 @@
     <depends>com.intellij.database</depends>
 
     <extensions defaultExtensionNs="com.intellij">
+        <postStartupActivity implementation="com.github.clementhvt.phpstormprestashopplugin.PrestashopStartupActivity"/>
         <applicationService
                 serviceImplementation="com.github.clementhvt.phpstormprestashopplugin.PrestashopSettingsState"/>
         <applicationConfigurable
@@ -24,11 +25,14 @@
                 implementationClass="com.github.clementhvt.phpstormprestashopplugin.DbPrefixDocumentationProvider"
                 language="PHP"
                 order="first"/>
-        <multiHostInjector implementation="com.github.clementhvt.phpstormprestashopplugin.ObjectModelTableDefinitionSqlInjector"/>
+        <multiHostInjector implementation="com.github.clementhvt.phpstormprestashopplugin.SqlInjector.ObjectModelTableDefinitionSqlInjector"/>
+        <multiHostInjector implementation="com.github.clementhvt.phpstormprestashopplugin.SqlInjector.ConfigurationValueSqlInjector"/>
         <gotoDeclarationHandler implementation="com.github.clementhvt.phpstormprestashopplugin.CoreClassGotoHandler"/>
         <codeInsight.lineMarkerProvider language="PHP" implementationClass="com.github.clementhvt.phpstormprestashopplugin.PrestashopOverrideLineMarkerProvider"/>
+        <codeInsight.lineMarkerProvider language="PHP" implementationClass="com.github.clementhvt.phpstormprestashopplugin.PrestashopCQRSHandlerLineMarkerProvider"/>
     </extensions>
     <extensions defaultExtensionNs="com.jetbrains.php">
         <typeProvider4 implementation="com.github.clementhvt.phpstormprestashopplugin.TypeProvider.DbPrefixConstantTypeProvider"/>
+        <libraryRoot id="prestashop-meta" path="/prestashop-meta/" runtime="false"/>
     </extensions>
 </idea-plugin>

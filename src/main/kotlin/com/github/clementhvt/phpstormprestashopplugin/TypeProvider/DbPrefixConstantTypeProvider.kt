@@ -16,7 +16,7 @@ class DbPrefixConstantTypeProvider: PhpTypeProvider4 {
     override fun getType(element: PsiElement?): PhpType? {
         if (element is ConstantReference && element.name == "_DB_PREFIX_") {
             val value = PrestashopSettingsState.getInstance().state.dbPrefix
-            return PhpType().add("#${getKey()}$value")
+            return PhpType().add("#${key}$value")
         }
         return null
     }

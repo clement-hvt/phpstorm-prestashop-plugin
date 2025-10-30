@@ -20,7 +20,7 @@ dependencies {
     // IntelliJ Platform Gradle Plugin Dependencies Extension - read more: https://plugins.jetbrains.com/docs/intellij/tools-intellij-platform-gradle-plugin-dependencies-extension.html
     intellijPlatform {
         intellijPlatform {
-            phpstorm("2025.2.3")
+            phpstorm("2025.2")
             plugins("com.jetbrains.php:251.23774.318")
             bundledPlugin("com.intellij.database")
         }

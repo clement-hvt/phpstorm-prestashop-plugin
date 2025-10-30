@@ -1,9 +1,10 @@
-package com.github.clementhvt.phpstormprestashopplugin
+package com.github.clementhvt.phpstormprestashopplugin.SqlInjector
 
+import com.github.clementhvt.phpstormprestashopplugin.PrestashopSettingsState
 import com.intellij.lang.injection.MultiHostInjector
 import com.intellij.lang.injection.MultiHostRegistrar
 import com.intellij.patterns.PatternCondition
-import com.intellij.patterns.PlatformPatterns.psiElement
+import com.intellij.patterns.PlatformPatterns
 import com.intellij.psi.ElementManipulators
 import com.intellij.psi.PsiElement
 import com.intellij.psi.PsiLanguageInjectionHost
@@ -14,12 +15,11 @@ import com.jetbrains.php.lang.psi.elements.ArrayHashElement
 import com.jetbrains.php.lang.psi.elements.Field
 import com.jetbrains.php.lang.psi.elements.StringLiteralExpression
 
-
 class ObjectModelTableDefinitionSqlInjector : MultiHostInjector {
-    val TABLE_VALUE_PATTERN = psiElement(PsiElement::class.java)
+    val TABLE_VALUE_PATTERN = PlatformPatterns.psiElement(PsiElement::class.java)
         .withSuperParent(
             2,
-            psiElement(ArrayHashElement::class.java)
+            PlatformPatterns.psiElement(ArrayHashElement::class.java)
                 .with(object : PatternCondition<ArrayHashElement>("keyIsTable") {
                     override fun accepts(arrayElement: ArrayHashElement, context: ProcessingContext?): Boolean {
                         val key = arrayElement.key as? StringLiteralExpression ?: return false
@@ -27,9 +27,9 @@ class ObjectModelTableDefinitionSqlInjector : MultiHostInjector {
                     }
                 })
                 .withParent(
-                    psiElement(ArrayCreationExpression::class.java)
+                    PlatformPatterns.psiElement(ArrayCreationExpression::class.java)
                         .withParent(
-                            psiElement(Field::class.java)
+                            PlatformPatterns.psiElement(Field::class.java)
                                 .withName("definition")
                         )
                 )
@@ -54,12 +54,11 @@ class ObjectModelTableDefinitionSqlInjector : MultiHostInjector {
         if (rangeInsideHost.isEmpty) return
 
         registrar.startInjecting(SqlLanguage.INSTANCE)
-        registrar.addPlace(
-            sqlCode,
-            "",
-            host as PsiLanguageInjectionHost,
-            rangeInsideHost
-        )
-        registrar.doneInjecting()
+            .addPlace(
+                sqlCode,
+                "",
+                host as PsiLanguageInjectionHost,
+                rangeInsideHost
+            ).doneInjecting()
     }
 }

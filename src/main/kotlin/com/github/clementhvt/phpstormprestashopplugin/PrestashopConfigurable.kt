@@ -1,7 +1,7 @@
 package com.github.clementhvt.phpstormprestashopplugin
 
 import com.intellij.openapi.options.Configurable
-import javax.swing.*
+import javax.swing.JComponent
 
 class PrestashopConfigurable : Configurable {
     private var prestashopSettingsComponent: PrestashopSettingsComponent? = null
